@@ -1,0 +1,14 @@
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\bin\Debug\netcoreapp2.1\demoAuthApp.deps.json
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\bin\Debug\netcoreapp2.1\demoAuthApp.runtimeconfig.json
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\bin\Debug\netcoreapp2.1\demoAuthApp.runtimeconfig.dev.json
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\bin\Debug\netcoreapp2.1\demoAuthApp.dll
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\bin\Debug\netcoreapp2.1\demoAuthApp.pdb
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.csproj.CoreCompileInputs.cache
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.RazorAssemblyInfo.cache
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.RazorAssemblyInfo.cs
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.AssemblyInfoInputs.cache
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.AssemblyInfo.cs
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.RazorTargetAssemblyInfo.cache
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.dll
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.pdb
+C:\Users\NikitaT\source\repos\demoAuthApp\demoAuthApp\obj\Debug\netcoreapp2.1\demoAuthApp.csprojAssemblyReference.cache
