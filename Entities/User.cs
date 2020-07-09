@@ -11,7 +11,7 @@ namespace BookApp.API.Entities
         public string UserName { get; set; }
         public string EmailId { get; set; }
         public string Password { get; set; }
-        public int Contact { get; set; }
+        public long Contact { get; set; }
         public string Gender { get; set; }
         public string Address { get; set; }
         public int StateId { get; set; }

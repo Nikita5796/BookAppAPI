@@ -82,7 +82,7 @@ namespace BookApp.DAL
                 {
                     throw new Exception("Invalid User Credentials.");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -104,6 +104,7 @@ namespace BookApp.DAL
             {
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.CommandText = "usp_Get_Users";
 
                 conn.Open();
@@ -121,7 +122,7 @@ namespace BookApp.DAL
                             UserName = reader.GetString(1),
                             EmailId = reader.GetString(2),
                             Password = reader.GetString(3),
-                            Contact = reader.GetInt32(4),
+                            Contact = reader.GetInt64(4),
                             Gender = reader.GetString(5),
                             Address = reader.GetString(6),
                             StateId = reader.GetInt32(7),
