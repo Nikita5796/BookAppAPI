@@ -29,7 +29,7 @@ namespace BookApp.API.Controllers
             return Ok();
         }
 
-        [HttpGet("{categoryId}")]
+        [HttpGet("category/{categoryId}")]
         public ActionResult<List<Book>> GetBooksByCategoryId(int categoryId)
         {
             return BookObj.GetBookByCategory(categoryId);

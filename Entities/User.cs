@@ -18,5 +18,6 @@ namespace BookApp.API.Entities
         public int CityId { get; set; }
         public int PostalCode { get; set; }
         public string Token { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace BookApp.BLL
             this.userDAL = userDAL;
         }
 
-        public bool AddUserBLL(User user)
+        public bool AddUser(User user)
         {
             bool status = false;
 

@@ -119,9 +119,21 @@ namespace BookApp.DAL
             {
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GetBookByCategoryId";
+                if (categoryid == 0)
+                {
+                    cmd.CommandText = "GetBookByCategoryId";
+                }
+                else {
+                    if (categoryid == 1)
+                    {
+                        cmd.CommandText = "usp_GetBook_Programming";
+                    }
+                    else
+                    {
+                        cmd.CommandText = "usp_GetBook_Biography";
+                    }
+                }
                 cmd.Parameters.AddWithValue("@CategoryId", categoryid);
-
                 conn.Open();
 
                 reader = cmd.ExecuteReader();
@@ -172,14 +184,31 @@ namespace BookApp.DAL
 
             try
             {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+                //SqlCommand command;
+                //int i = 0;
+
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GetBookByBookId";
                 cmd.Parameters.AddWithValue("@BookId", BookId);
 
                 conn.Open();
+                //command = new SqlCommand(cmd.CommandText, conn);
+                //adapter.SelectCommand = cmd;
+                //adapter.Fill(ds,"dbo.books");
+                //adapter.Dispose();
+                //cmd.Dispose();
+                //conn.Close();
 
-                reader = cmd.ExecuteReader();
+                //for(i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                //{
+
+                //}
+
+
+                    reader = cmd.ExecuteReader();
 
                 if (reader.HasRows)
                 {

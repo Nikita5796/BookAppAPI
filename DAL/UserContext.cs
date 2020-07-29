@@ -14,6 +14,9 @@ namespace BookApp.DAL
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataReader reader;
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
 
         public UserContext()
         {
@@ -57,100 +60,115 @@ namespace BookApp.DAL
             return status;
         }
 
-        public bool UserLogin(string emailId, string password)
+        public User UserLogin(string emailId, string password)
         {
-            bool status = false;
-            //User u1 = null;
+            User user = null;
             try
             {
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "UserLogin";
+                
+                //cmd.CommandText = "UserLogin";
+                cmd = new SqlCommand("UserLogin", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.AddWithValue("@EmailId", emailId);
                 cmd.Parameters.AddWithValue("@Password", password);
+                adapter.SelectCommand = cmd;
+                adapter.Fill(ds,"users");
+                adapter.Dispose();
+                cmd.Dispose();
+                conn.Close();
+                dt = ds.Tables[0];
 
-                conn.Open();
-
-                reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
+                user = new User
                 {
-                    status = true;
-                }
-                else
-                {
-                    throw new Exception("Invalid User Credentials.");
-                }
-
+                    UserId = Convert.ToInt32(dt.Rows[0]["UserId"]),
+                    UserName = dt.Rows[0]["Name"].ToString(),
+                    EmailId = dt.Rows[0]["EmailId"].ToString(),
+                    Password = dt.Rows[0]["Password"].ToString(),
+                    Contact = Convert.ToInt64(dt.Rows[0]["Contact"]),
+                    Gender = dt.Rows[0]["Gender"].ToString(),
+                    Address = dt.Rows[0]["Address"].ToString(),
+                    StateId = Convert.ToInt32(dt.Rows[0]["StateId"]),
+                    CityId = Convert.ToInt32(dt.Rows[0]["CityId"]),
+                    PostalCode = Convert.ToInt32(dt.Rows[0]["PostalCode"]),
+                    Token = dt.Rows[0]["Token"].ToString(),
+                    RefreshToken = dt.Rows[0]["RefreshToken"].ToString()
+                };
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            finally
-            {
-                reader.Close();
-                conn.Close();
-            }
-            return status;
+            return user;
         }
 
         public List<User> GetUsers()
         {
             List<User> list = null;
-
             try
             {
-                cmd = conn.CreateCommand();
+                cmd = new SqlCommand("usp_Get_Users", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.CommandText = "usp_Get_Users";
-
                 conn.Open();
+                adapter.SelectCommand = cmd;
+                adapter.Fill(ds, "users");
+                adapter.Dispose();
+                cmd.Dispose();
+                conn.Close();
+                dt = ds.Tables[0];
 
-                reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
+                User user = new User
                 {
-                    list = new List<User>();
-                    while (reader.Read())
-                    {
-                        User u1 = new User
-                        {
-                            UserId = reader.GetInt32(0),
-                            UserName = reader.GetString(1),
-                            EmailId = reader.GetString(2),
-                            Password = reader.GetString(3),
-                            Contact = reader.GetInt64(4),
-                            Gender = reader.GetString(5),
-                            Address = reader.GetString(6),
-                            StateId = reader.GetInt32(7),
-                            CityId = reader.GetInt32(8),
-                            PostalCode = reader.GetInt32(9),
-                            Token = reader.GetString(10)
-                        };
+                    UserId = Convert.ToInt32(dt.Rows[0]["UserId"]),
+                    UserName = dt.Rows[0]["Name"].ToString(),
+                    EmailId = dt.Rows[0]["EmailId"].ToString(),
+                    Password = dt.Rows[0]["Password"].ToString(),
+                    Contact = Convert.ToInt64(dt.Rows[0]["Contact"]),
+                    Gender = dt.Rows[0]["Gender"].ToString(),
+                    Address = dt.Rows[0]["Address"].ToString(),
+                    StateId = Convert.ToInt32(dt.Rows[0]["StateId"]),
+                    CityId = Convert.ToInt32(dt.Rows[0]["CityId"]),
+                    PostalCode = Convert.ToInt32(dt.Rows[0]["PostalCode"]),
+                    Token = dt.Rows[0]["Token"].ToString(),
+                    RefreshToken = dt.Rows[0]["RefreshToken"].ToString()
+                };
 
-                        list.Add(u1);
-                    }
-                }
-                else
-                {
-                    throw new Exception("No Data found");
-                }
+                list.Add(user);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error in reading...." + list.Count);
                 throw ex;
             }
+            return list;
+        }
+
+        public void StoreRefreshToken(RefreshToken refToken, int userId,string jwtToken)
+        {
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "usp_Store_Refresh_Token";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@TokenId", refToken.TokenId);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                cmd.Parameters.AddWithValue("@Token", refToken.Token);
+                cmd.Parameters.AddWithValue("@ExpiryDate", refToken.ExpiryDate);
+                cmd.Parameters.AddWithValue("@JwtToken", jwtToken);
+
+                conn.Open();
+
+                int count = cmd.ExecuteNonQuery();
+                if (count > 0)
+                    Console.WriteLine("data added...." + count);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             finally
             {
-                reader.Close();
                 conn.Close();
             }
-            return list;
-
         }
     }
 }

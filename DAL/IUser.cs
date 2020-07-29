@@ -10,7 +10,7 @@ namespace BookApp.DAL
     public interface IUser
     {
         bool AddUser(User user);
-        bool UserLogin(string emailId, string password);
+        //bool UserLogin(string emailId, string password);
         List<User> GetUsers();
     }
 }
