@@ -16,7 +16,7 @@ namespace BookApp.API.Helpers
     public class JWTHelper
     {
         //private readonly AppSettings _appSettings;
-
+        //JWT Access Token Generation
         public String Generate_Access_Token(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
